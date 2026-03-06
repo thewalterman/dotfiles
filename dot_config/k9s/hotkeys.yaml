@@ -1,0 +1,21 @@
+hotKeys:
+  namespaces:
+    shortCut: Shift-0
+    description: Viewing namespaces
+    command: namespaces
+  services:
+    shortCut: Shift-9
+    description: Viewing services
+    command: services
+  pods:
+    shortCut: Shift-8
+    description: Viewing pods
+    command: pods
+  helmreleases:
+    shortCut: Shift-7
+    description: Viewing helmreleases
+    command: helmreleases
+  kustomization:
+    shortCut: Shift-6
+    description: Viewing kustomization
+    command: kustomization

@@ -1,0 +1,7 @@
+[user]
+  email = {{ if hasKey . "email" }}{{ .email | quote }}{{ else }}"walter.lomonaco@gmail.com"{{ end }}
+  name = {{ if hasKey . "name" }}{{ .name | quote }}{{ else }}"Walter Lomonaco"{{ end }}
+
+[credential]
+  username = {{ if hasKey . "username" }}{{ .username | quote }}{{ else }}"thewalterman"{{ end }}
+  helper = {{ if hasKey . "helper" }}{{ .helper | quote }}{{ else }}"cache"{{ end }}
