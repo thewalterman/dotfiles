@@ -104,11 +104,10 @@ success "Apt packages installed"
 
 info "Installing Nerd Fonts (FiraCode)..."
 fonts_zip="FiraCode.zip"
-fonts_version="3.3.0"
 fonts_dir="$HOME/.local/share/fonts"
 mkdir -p "$fonts_dir"
 if ! ls "$fonts_dir"/FiraCode*.ttf &>/dev/null; then
-  wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v$fonts_version/$fonts_zip
+  wget -q https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$fonts_zip
   unzip -o "$fonts_zip" -d "$fonts_dir"
   rm -f "$fonts_zip"
   fc-cache -fv
