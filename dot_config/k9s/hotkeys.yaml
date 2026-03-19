@@ -1,8 +1,8 @@
 hotKeys:
-  namespaces:
+  nodes:
     shortCut: Shift-0
-    description: Viewing namespaces
-    command: namespaces
+    description: Viewing nodes
+    command: nodes
   services:
     shortCut: Shift-9
     description: Viewing services
