@@ -1,6 +1,5 @@
 [tools]
 ast-grep = "latest"
-atuin = "latest"
 chezmoi = "latest"
 flux2 = "2.7"
 helm = "3"

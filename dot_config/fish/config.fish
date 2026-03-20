@@ -44,4 +44,3 @@ test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
 mise activate fish | source
 starship init fish | source
 zoxide init fish | source
-atuin init fish --disable-up-arrow | source
