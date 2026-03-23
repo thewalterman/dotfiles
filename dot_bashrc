@@ -133,4 +133,5 @@ bind '"\e[Z":menu-complete-backward'
 
 eval "$(mise activate bash)"
 eval "$(starship init bash)"
+eval "$(tv init bash)"
 eval "$(zoxide init bash)"

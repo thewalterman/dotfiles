@@ -38,9 +38,12 @@ abbr -a --position anywhere -- xc '| xclip -selection clipboard'
 abbr -a --position anywhere -- h --help
 abbr -a --position anywhere -- v --version
 
+alias hc='echo "$(tv fish-history)" | xclip -selection clipboard'
+
 # Generated for envman. Do not edit.
 test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
 
 mise activate fish | source
 starship init fish | source
+tv init fish | source
 zoxide init fish | source

@@ -91,7 +91,6 @@ EXTRA_PACKS=(
   jq
   yq
   fish
-  starship
 )
 
 info "Updating and installing apt packages..."

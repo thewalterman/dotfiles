@@ -2,12 +2,10 @@ plugins:
   debug-node:
     shortCut: s
     description: Run a debug pod on node
-    dangerous: true
     scopes:
       - nodes
     command: bash
     background: false
-    confirm: true
     args:
       - -c
       - "kubectl debug -it node/$NAME --image=alpine --profile=general -- chroot /host bash; kubectl get pods -o name | grep node-debugger-$NAME | xargs kubectl delete --ignore-not-found"
