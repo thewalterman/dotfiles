@@ -90,11 +90,12 @@ EXTRA_PACKS=(
   fzf
   jq
   yq
+  imagemagick
   fish
 )
 
 info "Updating and installing apt packages..."
-sudo apt-add-repository ppa:fish-shell/release-4
+sudo apt-add-repository -y ppa:fish-shell/release-4
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y "${BASE_PACKS[@]}"
 sudo apt install -y "${ESSENTIAL_PACKS[@]}"

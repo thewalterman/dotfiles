@@ -15,26 +15,21 @@ local config = wezterm.config_builder()
 
 config.hide_tab_bar_if_only_one_tab = true
 config.font = wezterm.font("FiraCodeNerdFont")
-config.color_scheme = "Dark+"
-
+config.color_scheme = "Dark Pastel (Gogh)"
 config.window_decorations = "NONE"
 
-config.window_background_image = "Pictures/wallpaper.jpg"
-
-config.window_background_image_hsb = {
-	brightness = 0.1,
-}
+local act = wezterm.action
 
 config.mouse_bindings = {
 	{
 		event = { Up = { streak = 1, button = "Left" } },
 		mods = "NONE",
-		action = wezterm.action.CompleteSelection("ClipboardAndPrimarySelection"),
+		action = act.CompleteSelection("ClipboardAndPrimarySelection"),
 	},
 	{
 		event = { Up = { streak = 1, button = "Left" } },
 		mods = "CTRL",
-		action = wezterm.action.OpenLinkAtMouseCursor,
+		action = act.OpenLinkAtMouseCursor,
 	},
 }
 
@@ -42,27 +37,32 @@ config.keys = {
 	{
 		key = "{",
 		mods = "CTRL|SHIFT",
-		action = wezterm.action.MoveTabRelative(-1),
+		action = act.MoveTabRelative(-1),
 	},
 	{
 		key = "}",
 		mods = "CTRL|SHIFT",
-		action = wezterm.action.MoveTabRelative(1),
+		action = act.MoveTabRelative(1),
+	},
+	{
+		key = "b",
+		mods = "CTRL",
+		action = act.RotatePanes("CounterClockwise"),
 	},
 	{
 		key = "n",
 		mods = "CTRL",
-		action = wezterm.action.RotatePanes("Clockwise"),
+		action = act.RotatePanes("Clockwise"),
 	},
 	{
 		key = "|",
 		mods = "CTRL|SHIFT",
-		action = wezterm.action.SplitHorizontal({}),
+		action = act.SplitHorizontal({}),
 	},
 	{
 		key = "?",
 		mods = "CTRL|SHIFT",
-		action = wezterm.action.SplitVertical({}),
+		action = act.SplitVertical({}),
 	},
 }
 
