@@ -154,6 +154,7 @@ fi
 
 info "Cleaning up..."
 sudo apt autoclean && sudo apt autoremove -y
+touch ~/.hushlogin
 success "Cleanup complete"
 
 echo ""
