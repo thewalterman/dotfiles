@@ -124,6 +124,22 @@ function y() {
   rm -f -- "$tmp"
 }
 
+# Open devops tmux layout for the current dir (if KUBECONFIG is set),
+# else attach to the last session.
+function devops() {
+  if [ -n "${TMUX:-}" ]; then
+    echo "Already inside tmux (session: $(tmux display-message -p '#S'))"
+    return 1
+  fi
+  if [ -n "${KUBECONFIG:-}" ]; then
+    bash ~/.config/tmux/devops.sh "$(basename "$PWD")" "$PWD"
+  elif tmux list-sessions >/dev/null 2>&1; then
+    exec tmux attach
+  else
+    bash ~/.config/tmux/devops.sh
+  fi
+}
+
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
@@ -133,5 +149,4 @@ bind '"\e[Z":menu-complete-backward'
 
 eval "$(mise activate bash)"
 eval "$(starship init bash)"
-eval "$(tv init bash)"
 eval "$(zoxide init bash)"

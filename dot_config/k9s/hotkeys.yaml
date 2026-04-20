@@ -3,10 +3,10 @@ hotKeys:
     shortCut: Shift-0
     description: Viewing nodes
     command: nodes
-  services:
+  namespaces:
     shortCut: Shift-9
-    description: Viewing services
-    command: services
+    description: Viewing namespaces
+    command: namespaces
   pods:
     shortCut: Shift-8
     description: Viewing pods

@@ -88,8 +88,6 @@ EXTRA_PACKS=(
   pass
   eza
   fzf
-  jq
-  yq
   imagemagick
   fish
 )

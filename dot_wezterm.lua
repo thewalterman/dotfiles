@@ -45,13 +45,13 @@ config.keys = {
 		action = act.MoveTabRelative(1),
 	},
 	{
-		key = "b",
-		mods = "CTRL",
+		key = "<",
+		mods = "CTRL|SHIFT",
 		action = act.RotatePanes("CounterClockwise"),
 	},
 	{
-		key = "n",
-		mods = "CTRL",
+		key = ">",
+		mods = "CTRL|SHIFT",
 		action = act.RotatePanes("Clockwise"),
 	},
 	{

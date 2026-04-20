@@ -29,3 +29,11 @@ Powered by [chezmoi](https://www.chezmoi.io/) and [mise](https://mise.jdx.dev/).
    ```bash
    nvim
    ```
+
+6. Install TPM (Tmux Plugin Manager) and fetch plugins:
+
+   ```bash
+   git clone --depth=1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+   ```
+
+   Then launch `tmux` and press `Ctrl+b` `Shift+i` to install the plugins declared in `~/.config/tmux/tmux.conf`.
