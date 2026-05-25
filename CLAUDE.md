@@ -25,7 +25,7 @@ chezmoi apply ~/.config/fish/config.fish
 bash debian-startup.sh
 ```
 
-This installs system packages, Docker, FiraCode Nerd Fonts, LazyVim, mise, and sets Fish as the default shell.
+This installs system packages, Docker, FiraCode Nerd Fonts, LazyVim, mise, Fish as default shell, Fisher with all plugins declared in `dot_config/fish/fish_plugins`, and configures the Tide prompt.
 
 TPM (Tmux Plugin Manager) is not auto-installed: clone it manually at `~/.tmux/plugins/tpm` and run `prefix + I` inside tmux to fetch plugins. See README step 6.
 
@@ -39,17 +39,18 @@ TPM (Tmux Plugin Manager) is not auto-installed: clone it manually at `~/.tmux/p
 
 ### Runtime tool management
 
-All CLI tools (neovim, kubectl, helm, k9s, lazygit, yazi, starship, node, python, go, java, etc.) are managed by **mise** (`dot_config/mise/config.toml`). Do not assume system-installed versions. Tmux is installed from apt (see `debian-startup.sh`).
+All CLI tools (neovim, kubectl, helm, k9s, lazygit, yazi, node, python, java, etc.) are managed by **mise** (`dot_config/mise/config.toml`). Do not assume system-installed versions. Tmux is installed from apt (see `debian-startup.sh`).
 
 ### Shell startup chain
 
-Fish (`dot_config/fish/config.fish`) initializes in order: envman → mise → starship → zoxide. Bash (`dot_bashrc`) mirrors this chain as fallback.
+Fish (`dot_config/fish/config.fish`) initializes in order: envman → mise → zoxide. Bash (`dot_bashrc`) mirrors this chain as fallback.
 
 ### Key configs
 
 | File | Purpose |
 |------|---------|
 | `dot_config/fish/config.fish` | Fish shell with abbreviations for git, docker, k8s, helm, flux |
+| `dot_config/fish/fish_plugins` | Fisher plugin list (tide, fzf.fish); `fisher update` reads this file |
 | `dot_config/mise/config.toml` | Pinned versions for all dev tools |
 | `dot_config/nvim/` | LazyVim-based Neovim with custom plugins |
 | `dot_config/k9s/` | K9s with custom hotkeys, aliases, skins, debug plugin |

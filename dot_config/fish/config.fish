@@ -42,5 +42,4 @@ abbr -a --position anywhere -- v --version
 test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
 
 mise activate fish | source
-starship init fish | source
 zoxide init fish | source

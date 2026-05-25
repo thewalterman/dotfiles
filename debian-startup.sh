@@ -150,6 +150,20 @@ else
   info "Fish already default shell, skipping"
 fi
 
+info "Installing Fisher and Fish plugins..."
+if ! fish -c "type -q fisher" &>/dev/null; then
+  fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
+  success "Fisher installed"
+else
+  info "Fisher already installed, skipping"
+fi
+fish -c "fisher update"
+success "Fish plugins installed"
+
+info "Configuring Tide prompt..."
+fish -c "tide configure --auto --style=Lean --prompt_colors='True color' --show_time=No --lean_prompt_height='Two lines' --prompt_connection=Disconnected --prompt_spacing=Sparse --icons='Few icons' --transient=Yes"
+success "Tide configured"
+
 info "Cleaning up..."
 sudo apt autoclean && sudo apt autoremove -y
 touch ~/.hushlogin
