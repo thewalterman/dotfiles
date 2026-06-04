@@ -1,13 +1,13 @@
 function fssh
     if test -z "$argv[1]"
-        echo "Uso: fssh <host>"
+        echo "Use: fssh <host>"
         return 1
     end
 
     set -l hosts (awk '/^Host / {print $2}' $HOME/.ssh/config)
 
     if not contains $argv[1] $hosts
-        echo "Host non trovato in $HOME/.ssh/config"
+        echo "Host not found in $HOME/.ssh/config"
         return 1
     end
     set host $argv[1]

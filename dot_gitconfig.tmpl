@@ -4,4 +4,6 @@
 
 [credential]
   username = {{ if hasKey . "username" }}{{ .username | quote }}{{ else }}"thewalterman"{{ end }}
-  helper = {{ if hasKey . "helper" }}{{ .helper | quote }}{{ else }}"cache"{{ end }}
+
+[include]
+  path = ~/.gitconfig.local

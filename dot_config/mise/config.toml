@@ -1,21 +1,14 @@
 [tools]
 ast-grep = "latest"
 chezmoi = "latest"
-flux2 = "2.7"
-helm = "3"
-java = "21"
+helm = "latest"
 jq = "latest"
-k3d = "latest"
 k9s = "latest"
 kubectl = "latest"
 lazydocker = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "24"
-python = "3.13"
 usage = "latest"
 yazi = "latest"
 yq = "latest"
-
-[settings]
-experimental = true
