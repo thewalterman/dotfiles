@@ -13,10 +13,11 @@ end)
 
 local config = wezterm.config_builder()
 
-config.hide_tab_bar_if_only_one_tab = true
+config.front_end = "WebGpu"
+config.hide_tab_bar_if_only_one_tab = false
 config.font = wezterm.font("FiraCodeNerdFont")
 config.color_scheme = "Dark Pastel (Gogh)"
-config.window_decorations = "NONE"
+config.window_decorations = "RESIZE"
 
 local act = wezterm.action
 

@@ -86,6 +86,7 @@ EXTRA_PACKS=(
   luarocks
   sshpass
   pass
+  pass-otp
   eza
   fzf
   imagemagick
