@@ -22,12 +22,17 @@ chezmoi apply ~/.config/fish/config.fish
 ## Bootstrap a new machine
 
 ```bash
+# 1. Run bootstrap (system packages, Docker, FiraCode Nerd Fonts, mise, Fish, Fisher/Tide)
 bash debian-startup.sh
+# 2. Reboot, then apply dotfiles
+mise x chezmoi -- chezmoi init --apply thewalterman
+# 3. Install all mise-managed tools
+mise install
+# 4. Open nvim and wait for lazy.nvim to install plugins
+nvim
 ```
 
-This installs system packages, Docker, FiraCode Nerd Fonts, LazyVim, mise, Fish as default shell, Fisher with all plugins declared in `dot_config/fish/fish_plugins`, and configures the Tide prompt.
-
-TPM (Tmux Plugin Manager) is not auto-installed: clone it manually at `~/.tmux/plugins/tpm` and run `prefix + I` inside tmux to fetch plugins. See README step 6.
+TPM (Tmux Plugin Manager) is not auto-installed: clone it manually at `~/.tmux/plugins/tpm` and run `prefix + I` inside tmux to fetch plugins.
 
 ## Architecture
 
@@ -58,6 +63,8 @@ Fish (`dot_config/fish/config.fish`) initializes in order: envman → mise → z
 | `dot_config/tmux/devops.sh` | Recreates the devops layout: window `dev` (nvim + claude), window `ops` (k9s + shell) |
 | `dot_wezterm.lua` | WezTerm terminal with FiraCodeNerdFont, Dark Pastel theme |
 | `dot_gitconfig.tmpl` | Templated git config (email/name from chezmoi data or defaults) |
+| `dot_claude/CLAUDE.md` | Global Claude Code config — deploys to `~/.claude/CLAUDE.md` |
+| `dot_config/envman/alias.env` | Shell aliases (`cm=chezmoi`, `k=kubectl`, `l=nvim`, `up=apt+mise upgrade`, etc.) |
 
 ### Tmux devops layout
 
@@ -76,6 +83,7 @@ Abbreviations use `abbr -a name 'expansion'`. Many use `--set-cursor='%'` for cu
 Custom functions live in `dot_config/fish/functions/`:
 
 - `y` — Yazi file browser with CWD integration (changes shell directory on exit)
+- `fcd` — fzf directory picker (uses `fdfind` + `eza` preview) that `cd`s into the selection
 - `fkube` — Kubernetes fuzzy-select utilities
 - `fssh` — SSH helper
 - `devops` — Dispatch for the tmux devops layout. If `$KUBECONFIG` is set (typically from a project-local `mise.toml`), creates/attaches a session named after the current directory. Otherwise attaches to the most recent live session, or falls back to a default `devops` session. Mirrored as a bash function in `dot_bashrc`.
