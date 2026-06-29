@@ -64,6 +64,7 @@ Fish (`dot_config/fish/config.fish`) initializes in order: envman → mise → z
 | `dot_wezterm.lua` | WezTerm terminal with FiraCodeNerdFont, Dark Pastel theme |
 | `dot_gitconfig.tmpl` | Templated git config (email/name from chezmoi data or defaults) |
 | `dot_claude/CLAUDE.md` | Global Claude Code config — deploys to `~/.claude/CLAUDE.md` |
+| `dot_claude/agents/` | Custom Claude Code subagent definitions — deploys to `~/.claude/agents/` |
 | `dot_config/envman/alias.env` | Shell aliases (`cm=chezmoi`, `k=kubectl`, `l=nvim`, `up=apt+mise upgrade`, etc.) |
 
 ### Tmux devops layout
@@ -87,6 +88,18 @@ Custom functions live in `dot_config/fish/functions/`:
 - `fkube` — Kubernetes fuzzy-select utilities
 - `fssh` — SSH helper
 - `devops` — Dispatch for the tmux devops layout. If `$KUBECONFIG` is set (typically from a project-local `mise.toml`), creates/attaches a session named after the current directory. Otherwise attaches to the most recent live session, or falls back to a default `devops` session. Mirrored as a bash function in `dot_bashrc`.
+
+### Claude Code agents
+
+`dot_claude/agents/` contains subagent definitions that deploy to `~/.claude/agents/`. Each file is a markdown file with YAML frontmatter (`name`, `description`, `model`, `tools`) followed by a system prompt. Current agents:
+
+- `coder.md` — writes Terraform/K8s/Bash/Python code following strict conventions (Sonnet)
+- `planner.md` — researches and produces implementation plans, never writes code (Opus)
+- `security-reviewer.md` — reviews infrastructure diffs for security findings, never modifies files (Opus)
+
+### Chezmoi ignore
+
+`.chezmoiignore` lists files in the repo that chezmoi does NOT deploy: `README.md`, `CLAUDE.md`, `debian-startup.sh`. These are meta/bootstrap files only.
 
 ### Chezmoi template data
 
