@@ -17,7 +17,7 @@ tmux set-option   -p -t "$SESSION:dev.2" remain-on-exit on
 tmux select-pane  -t "$SESSION:dev.1"
 
 # ops window
-tmux new-window   -t "$SESSION" -c "$CWD" -n ops k9s
+tmux new-window   -t "$SESSION" -c "$CWD" -n ops "k9s -A"
 tmux set-option   -p -t "$SESSION:ops.1" remain-on-exit on
 tmux split-window -v -l 30% -c "$CWD" -t "$SESSION:ops"
 tmux set-option   -p -t "$SESSION:ops.2" remain-on-exit on

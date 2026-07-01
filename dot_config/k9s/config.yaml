@@ -4,6 +4,7 @@ k9s:
   refreshRate: 2
   maxConnRetry: 5
   readOnly: false
+  defaultView: "pods"
   noExitOnCtrlC: false
   ui:
     enableMouse: false
