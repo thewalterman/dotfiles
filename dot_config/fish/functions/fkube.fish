@@ -25,7 +25,7 @@ function fkube
         return 1
     end
 
-    k9s --kubeconfig=$file
+    env KUBECONFIG=$file k9s
 end
 
 # Autocomplete

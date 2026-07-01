@@ -8,4 +8,4 @@ plugins:
     background: false
     args:
       - -c
-      - "kubectl debug -it node/$NAME --image=alpine --profile=general -- chroot /host bash; kubectl get pods -o name | grep node-debugger-$NAME | xargs kubectl delete --ignore-not-found"
+      - "POD=$(kubectl debug node/$NAME --image=alpine --profile=general -- sleep 3600 2>&1 | awk '/Creating debugging pod/ {print $4}'); kubectl wait --for=condition=Ready pod/$POD --timeout=60s; kubectl exec -it $POD -- chroot /host sh -c 'command -v bash >/dev/null 2>&1 && exec bash || exec sh'; kubectl delete pod/$POD --ignore-not-found"
