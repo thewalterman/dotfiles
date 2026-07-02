@@ -48,7 +48,7 @@ All CLI tools (neovim, kubectl, helm, k9s, lazygit, yazi, node, python, java, et
 
 ### Shell startup chain
 
-Fish (`dot_config/fish/config.fish`) initializes in order: envman → mise → zoxide. Bash (`dot_bashrc`) mirrors this chain as fallback.
+Fish (`dot_config/fish/config.fish`) initializes aliases/abbreviations, then mise → zoxide. Bash (`dot_bashrc`) mirrors this chain as fallback.
 
 ### Key configs
 
@@ -65,7 +65,6 @@ Fish (`dot_config/fish/config.fish`) initializes in order: envman → mise → z
 | `dot_gitconfig.tmpl` | Templated git config (email/name from chezmoi data or defaults) |
 | `dot_claude/CLAUDE.md` | Global Claude Code config — deploys to `~/.claude/CLAUDE.md` |
 | `dot_claude/agents/` | Custom Claude Code subagent definitions — deploys to `~/.claude/agents/` |
-| `dot_config/envman/alias.env` | Shell aliases (`cm=chezmoi`, `k=kubectl`, `l=nvim`, `up=apt+mise upgrade`, etc.) |
 
 ### Tmux devops layout
 

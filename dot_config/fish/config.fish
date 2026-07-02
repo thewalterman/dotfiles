@@ -1,5 +1,22 @@
-set -x EDITOR nvim
-set -x KUBE_EDITOR nvim
+fish_add_path $HOME/.local/bin
+
+alias b 'cd -'
+alias bat 'batcat'
+alias c 'clear'
+alias cat 'batcat -pp'
+alias cm 'chezmoi'
+alias d 'docker'
+alias fd 'fdfind'
+alias k 'kubectl'
+alias kk 'k9s -A'
+alias lg 'lazygit'
+alias lc 'lazydocker'
+alias ls 'eza --icons -1'
+alias la 'eza --icons -TL2'
+alias ll 'eza -hal --header --icons'
+alias l 'nvim'
+alias q 'exit'
+alias t 'tldr'
 
 abbr -a -- inst 'sudo apt install -y'
 abbr -a -- rem 'sudo apt remove -y'
@@ -37,9 +54,6 @@ abbr -a -- fr 'flux logs --level=error -n'
 abbr -a --position anywhere -- xc '| xclip -selection clipboard'
 abbr -a --position anywhere -- h --help
 abbr -a --position anywhere -- v --version
-
-# Generated for envman. Do not edit.
-test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
 
 mise activate fish | source
 zoxide init fish | source

@@ -1,3 +1,13 @@
+[env]
+EDITOR = "nvim"
+KUBE_EDITOR = "nvim"
+K9S_FEATURE_GATE_NODE_SHELL = "true"
+
+[tasks.update]
+quiet = true
+description = "Update apt packages and upgrade mise itself + all mise-managed tools"
+run = "sudo apt update && sudo apt upgrade -y && mise self-update -y && mise upgrade"
+
 [tools]
 ast-grep = "latest"
 chezmoi = "latest"
