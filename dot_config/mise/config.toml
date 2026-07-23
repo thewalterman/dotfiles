@@ -19,6 +19,11 @@ lazydocker = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "24"
+stern = "latest"
+tree-sitter = "latest"
 usage = "latest"
 yazi = "latest"
 yq = "latest"
+
+[settings]
+experimental = true
