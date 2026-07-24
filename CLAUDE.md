@@ -22,7 +22,7 @@ chezmoi apply ~/.config/fish/config.fish
 ## Bootstrap a new machine
 
 ```bash
-# 1. Run bootstrap (system packages, Docker, FiraCode Nerd Fonts, mise, Fish, Fisher/Tide)
+# 1. Run bootstrap (system packages, Docker, FiraCode Nerd Fonts, mise, Fish, Fisher)
 bash debian-startup.sh
 # 2. Reboot, then apply dotfiles
 mise x chezmoi -- chezmoi init --apply thewalterman
@@ -55,7 +55,8 @@ Fish (`dot_config/fish/config.fish`) initializes aliases/abbreviations, then mis
 | File | Purpose |
 |------|---------|
 | `dot_config/fish/config.fish` | Fish shell with abbreviations for git, docker, k8s, helm, flux |
-| `dot_config/fish/fish_plugins` | Fisher plugin list (tide, fzf.fish); `fisher update` reads this file |
+| `dot_config/fish/fish_plugins` | Fisher plugin list (pure-fish, fzf.fish, puffer-fish); `fisher update` reads this file |
+| `dot_config/fish/fish_variables` | Fish universal variables (fisher plugin state, `pure_*` prompt config, zoxide data dir) — tracked so prompt settings survive `chezmoi apply` on a new machine |
 | `dot_config/mise/config.toml` | Pinned versions for all dev tools |
 | `dot_config/nvim/` | LazyVim-based Neovim with custom plugins |
 | `dot_config/k9s/` | K9s with custom hotkeys, aliases, skins, debug plugin |
@@ -77,6 +78,10 @@ Custom additions live in `dot_config/nvim/lua/plugins/`. Key plugins: bufferline
 ### Fish abbreviations pattern
 
 Abbreviations use `abbr -a name 'expansion'`. Many use `--set-cursor='%'` for cursor positioning mid-command — the `%` is replaced by the cursor position at expansion (e.g. `gc` expands to `git commit -m ''` with cursor inside quotes).
+
+### Fish prompt (pure)
+
+Prompt is [pure-fish](https://github.com/pure-fish/pure) (`fish_plugins`), configured entirely through `pure_*` universal variables persisted in `dot_config/fish/fish_variables` — not in `config.fish`. When changing a `pure_*` setting, `set -U` it and then re-sync `fish_variables` into the repo (e.g. `chezmoi re-add ~/.config/fish/fish_variables`) or the change won't reach other machines. `debian-startup.sh` still runs `tide configure` from before the switch to pure — that step is now a no-op/stale and can be ignored or removed.
 
 ### Fish functions
 
