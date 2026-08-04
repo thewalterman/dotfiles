@@ -155,7 +155,6 @@ alias la='eza --icons -TL2'
 alias ll='eza -hal --header --icons'
 alias l='nvim'
 alias q='exit'
-alias t='tldr'
 
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'

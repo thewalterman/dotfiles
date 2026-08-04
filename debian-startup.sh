@@ -79,7 +79,6 @@ EXTRA_PACKS=(
   btop
   gdu
   duf
-  tldr
   bat
   ripgrep
   fd-find
