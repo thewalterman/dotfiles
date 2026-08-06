@@ -44,7 +44,7 @@ TPM (Tmux Plugin Manager) is not auto-installed: clone it manually at `~/.tmux/p
 
 ### Runtime tool management
 
-All CLI tools (neovim, kubectl, helm, k9s, lazygit, yazi, node, python, java, etc.) are managed by **mise** (`dot_config/mise/config.toml`). Do not assume system-installed versions. Tmux is installed from apt (see `debian-startup.sh`).
+All CLI tools (neovim, kubectl, helm, k9s, lazygit, yazi, node, ast-grep, stern, tree-sitter, etc.) are managed by **mise** (`dot_config/mise/config.toml`). Do not assume system-installed versions. Tmux is installed from apt (see `debian-startup.sh`).
 
 ### Shell startup chain
 
@@ -53,7 +53,7 @@ Fish (`dot_config/fish/config.fish`) initializes aliases/abbreviations, then mis
 ### Key configs
 
 | File | Purpose |
-|------|---------|
+| ------ | --------- |
 | `dot_config/fish/config.fish` | Fish shell with abbreviations for git, docker, k8s, helm, flux |
 | `dot_config/fish/fish_plugins` | Fisher plugin list (pure-fish, fzf.fish, puffer-fish); `fisher update` reads this file |
 | `dot_config/fish/fish_variables` | Fish universal variables (fisher plugin state, `pure_*` prompt config, zoxide data dir) — tracked so prompt settings survive `chezmoi apply` on a new machine |
@@ -66,6 +66,7 @@ Fish (`dot_config/fish/config.fish`) initializes aliases/abbreviations, then mis
 | `dot_gitconfig.tmpl` | Templated git config (email/name from chezmoi data or defaults) |
 | `dot_claude/CLAUDE.md` | Global Claude Code config — deploys to `~/.claude/CLAUDE.md` |
 | `dot_claude/agents/` | Custom Claude Code subagent definitions — deploys to `~/.claude/agents/` |
+| `dot_claude/skills/` | Custom Claude Code skills — deploys to `~/.claude/skills/` |
 
 ### Tmux devops layout
 
@@ -81,7 +82,7 @@ Abbreviations use `abbr -a name 'expansion'`. Many use `--set-cursor='%'` for cu
 
 ### Fish prompt (pure)
 
-Prompt is [pure-fish](https://github.com/pure-fish/pure) (`fish_plugins`), configured entirely through `pure_*` universal variables persisted in `dot_config/fish/fish_variables` — not in `config.fish`. When changing a `pure_*` setting, `set -U` it and then re-sync `fish_variables` into the repo (e.g. `chezmoi re-add ~/.config/fish/fish_variables`) or the change won't reach other machines. `debian-startup.sh` still runs `tide configure` from before the switch to pure — that step is now a no-op/stale and can be ignored or removed.
+Prompt is [pure-fish](https://github.com/pure-fish/pure) (`fish_plugins`), configured entirely through `pure_*` universal variables persisted in `dot_config/fish/fish_variables` — not in `config.fish`. When changing a `pure_*` setting, `set -U` it and then re-sync `fish_variables` into the repo (e.g. `chezmoi re-add ~/.config/fish/fish_variables`) or the change won't reach other machines.
 
 ### Fish functions
 
@@ -101,6 +102,18 @@ Custom functions live in `dot_config/fish/functions/`:
 - `planner.md` — researches and produces implementation plans, never writes code (Opus)
 - `security-reviewer.md` — reviews infrastructure diffs for security findings, never modifies files (Opus)
 
+### Claude Code skills
+
+`dot_claude/skills/` contains skill definitions (each a `SKILL.md` with YAML frontmatter `name`/`description`) that deploy to `~/.claude/skills/`. They gate infra changes on specific tool invocations rather than manual review steps:
+
+- `tf-fmt-validate`, `tf-plan-diff`, `cost-estimate` — Terraform format/validate, plan diff, and infracost estimate
+- `k8s-dry-run`, `rbac-diff` — Kubernetes/Helm server-side dry run and RBAC before/after diff
+- `policy-scan`, `secrets-scan` — tfsec/kube-score static scanning, gitleaks secret scanning
+- `shellcheck-gate` — shellcheck on any written/edited bash script
+- `provider-docs-lookup` — fetch pinned-version docs for a Terraform provider resource, K8s API object, or Helm chart
+
+Each skill expects its underlying tool (`terraform`, `infracost`, `tfsec`, `kube-score`, `gitleaks`, `shellcheck`) on `PATH` via mise and tells the user to `mise use -g <tool>` if missing — none of these are in the default `dot_config/mise/config.toml` tool set.
+
 ### Chezmoi ignore
 
 `.chezmoiignore` lists files in the repo that chezmoi does NOT deploy: `README.md`, `CLAUDE.md`, `debian-startup.sh`. These are meta/bootstrap files only.
@@ -112,7 +125,7 @@ Template variables (`.email`, `.name`, `.username`, `.helper`) are sourced from 
 ### WezTerm pane/tab keybindings
 
 | Binding | Action |
-|---------|--------|
+| --------- | -------- |
 | Ctrl+Shift+{ / } | Rotate tabs left/right |
 | Ctrl+Shift+\| | Split pane horizontal |
 | Ctrl+Shift+? | Split pane vertical |

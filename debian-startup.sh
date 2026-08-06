@@ -160,10 +160,6 @@ fi
 fish -c "fisher update"
 success "Fish plugins installed"
 
-info "Configuring Tide prompt..."
-fish -c "tide configure --auto --style=Lean --prompt_colors='True color' --show_time=No --lean_prompt_height='Two lines' --prompt_connection=Disconnected --prompt_spacing=Sparse --icons='Few icons' --transient=Yes"
-success "Tide configured"
-
 info "Cleaning up..."
 sudo apt autoclean && sudo apt autoremove -y
 touch ~/.hushlogin
