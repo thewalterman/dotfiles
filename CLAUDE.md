@@ -32,8 +32,6 @@ mise install
 nvim
 ```
 
-TPM (Tmux Plugin Manager) is not auto-installed: clone it manually at `~/.tmux/plugins/tpm` and run `prefix + I` inside tmux to fetch plugins.
-
 ## Architecture
 
 ### File naming (chezmoi conventions)
@@ -44,7 +42,7 @@ TPM (Tmux Plugin Manager) is not auto-installed: clone it manually at `~/.tmux/p
 
 ### Runtime tool management
 
-All CLI tools (neovim, kubectl, helm, k9s, lazygit, yazi, node, ast-grep, stern, tree-sitter, etc.) are managed by **mise** (`dot_config/mise/config.toml`). Do not assume system-installed versions. Tmux is installed from apt (see `debian-startup.sh`).
+All CLI tools (neovim, kubectl, helm, k9s, lazygit, yazi, node, ast-grep, stern, tree-sitter, zellij, etc.) are managed by **mise** (`dot_config/mise/config.toml`). Do not assume system-installed versions.
 
 ### Shell startup chain
 
@@ -60,17 +58,18 @@ Fish (`dot_config/fish/config.fish`) initializes aliases/abbreviations, then mis
 | `dot_config/mise/config.toml` | Pinned versions for all dev tools |
 | `dot_config/nvim/` | LazyVim-based Neovim with custom plugins |
 | `dot_config/k9s/` | K9s with custom hotkeys, aliases, skins, debug plugin |
-| `dot_config/tmux/tmux.conf` | Tmux config with TPM plugins (resurrect, continuum, yank, vim-tmux-navigator) |
-| `dot_config/tmux/devops.sh` | Recreates the devops layout: window `dev` (nvim + claude), window `ops` (k9s + shell) |
+| `dot_config/zellij/config.kdl` | Zellij config: tmux-style `Ctrl+b` prefix mode (built-in), larger scrollback |
+| `dot_config/zellij/layouts/devops.kdl` | Devops layout: tab `dev` (nvim + claude), tab `ops` (k9s + shell) |
+| `dot_config/zellij/devops.sh` | Attaches to (or creates, via the `devops` layout) a named zellij session |
 | `dot_wezterm.lua` | WezTerm terminal with FiraCodeNerdFont, Dark Pastel theme |
 | `dot_gitconfig.tmpl` | Templated git config (email/name from chezmoi data or defaults) |
 | `dot_claude/CLAUDE.md` | Global Claude Code config — deploys to `~/.claude/CLAUDE.md` |
 | `dot_claude/agents/` | Custom Claude Code subagent definitions — deploys to `~/.claude/agents/` |
 | `dot_claude/skills/` | Custom Claude Code skills — deploys to `~/.claude/skills/` |
 
-### Tmux devops layout
+### Zellij devops layout
 
-`devops.sh` launches nvim/claude/k9s as the **top-level process of each pane** (passed as shell-command argument to `new-session`/`new-window`/`split-window`), not via `send-keys` into a shell. Combined with `remain-on-exit on` (set per-pane), this means: when the app exits, the pane becomes "dead" instead of closing, and `prefix + R` respawns the original command — mimicking zellij's `command` pane behavior. The bottom shell pane in the `ops` window has the same treatment.
+`layouts/devops.kdl` declares nvim/claude/k9s as `command` panes in two tabs (`dev`, `ops`). Zellij's default behavior for command panes already matches tmux's old `remain-on-exit` + `prefix + R` setup: when the command exits, the pane stays open and pressing `ENTER` re-runs it — no extra config needed. `devops.sh` does `zellij attach --create <session> options --default-layout devops`, which attaches to an existing session or creates one with this layout, keyed by directory name when `$KUBECONFIG` is set.
 
 ### Neovim plugins (LazyVim base)
 
@@ -92,7 +91,7 @@ Custom functions live in `dot_config/fish/functions/`:
 - `fcd` — fzf directory picker (uses `fdfind` + `eza` preview) that `cd`s into the selection
 - `fkube` — Kubernetes fuzzy-select utilities
 - `fssh` — SSH helper
-- `devops` — Dispatch for the tmux devops layout. If `$KUBECONFIG` is set (typically from a project-local `mise.toml`), creates/attaches a session named after the current directory. Otherwise attaches to the most recent live session, or falls back to a default `devops` session. Mirrored as a bash function in `dot_bashrc`.
+- `devops` — With no args, attaches to (or creates, via the `devops` layout) a zellij session named after the current directory's basename. With a session name arg, plain `zellij attach <name>` instead — tab-completed from `zellij list-sessions` via `dot_config/fish/completions/devops.fish`. Always targets a named session — `zellij attach` with no name errors out (and would kill the shell via `exec`) once 2+ sessions exist. Mirrored as a bash function in `dot_bashrc`.
 
 ### Claude Code agents
 

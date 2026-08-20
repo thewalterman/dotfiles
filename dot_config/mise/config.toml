@@ -24,6 +24,7 @@ tree-sitter = "latest"
 usage = "latest"
 yazi = "latest"
 yq = "latest"
+zellij = "latest"
 
 [settings]
 experimental = true
