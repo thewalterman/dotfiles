@@ -167,16 +167,6 @@ else
   info "Fish already default shell, skipping"
 fi
 
-info "Installing Fisher and Fish plugins..."
-if ! fish -c "type -q fisher" &>/dev/null; then
-  fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-  success "Fisher installed"
-else
-  info "Fisher already installed, skipping"
-fi
-fish -c "fisher update"
-success "Fish plugins installed"
-
 info "Cleaning up..."
 sudo apt autoclean && sudo apt autoremove -y
 touch ~/.hushlogin

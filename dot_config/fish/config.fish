@@ -55,4 +55,5 @@ abbr -a --position anywhere -- h --help
 abbr -a --position anywhere -- v --version
 
 mise activate fish | source
+starship init fish | source
 zoxide init fish | source

@@ -22,7 +22,7 @@ chezmoi apply ~/.config/fish/config.fish
 ## Bootstrap a new machine
 
 ```bash
-# 1. Run bootstrap (system packages, Docker, FiraCode Nerd Fonts, mise, Fish, Fisher)
+# 1. Run bootstrap (system packages, Docker, FiraCode Nerd Fonts, mise, Fish)
 bash debian-startup.sh
 # 2. Reboot, then apply dotfiles
 mise x chezmoi -- chezmoi init --apply thewalterman
@@ -42,20 +42,20 @@ nvim
 
 ### Runtime tool management
 
-All CLI tools (neovim, kubectl, helm, k9s, lazygit, yazi, node, ast-grep, stern, tree-sitter, zellij, etc.) are managed by **mise** (`dot_config/mise/config.toml`). Do not assume system-installed versions.
+All CLI tools (neovim, kubectl, helm, k9s, lazygit, yazi, node, ast-grep, stern, tree-sitter, zellij, starship, etc.) are managed by **mise** (`dot_config/mise/config.toml`). Do not assume system-installed versions.
 
 ### Shell startup chain
 
-Fish (`dot_config/fish/config.fish`) initializes aliases/abbreviations, then mise → zoxide. Bash (`dot_bashrc`) mirrors this chain as fallback.
+Fish (`dot_config/fish/config.fish`) initializes aliases/abbreviations, then mise → starship → zoxide. Bash (`dot_bashrc`) mirrors this chain as fallback.
 
 ### Key configs
 
 | File | Purpose |
 | ------ | --------- |
 | `dot_config/fish/config.fish` | Fish shell with abbreviations for git, docker, k8s, helm, flux |
-| `dot_config/fish/fish_plugins` | Fisher plugin list (pure-fish, fzf.fish, puffer-fish); `fisher update` reads this file |
-| `dot_config/fish/fish_variables` | Fish universal variables (fisher plugin state, `pure_*` prompt config, zoxide data dir) — tracked so prompt settings survive `chezmoi apply` on a new machine |
+| `dot_config/fish/fish_variables` | Fish universal variables (zoxide data dir, etc.) — tracked so settings survive `chezmoi apply` on a new machine |
 | `dot_config/mise/config.toml` | Pinned versions for all dev tools |
+| `dot_config/starship.toml` | Starship prompt config (kubernetes context in right prompt, per-language symbols) |
 | `dot_config/nvim/` | LazyVim-based Neovim with custom plugins |
 | `dot_config/k9s/` | K9s with custom hotkeys, aliases, skins, debug plugin |
 | `dot_config/zellij/config.kdl` | Zellij config: tmux-style `Ctrl+b` prefix mode (built-in), larger scrollback |
@@ -79,9 +79,9 @@ Custom additions live in `dot_config/nvim/lua/plugins/`. Key plugins: bufferline
 
 Abbreviations use `abbr -a name 'expansion'`. Many use `--set-cursor='%'` for cursor positioning mid-command — the `%` is replaced by the cursor position at expansion (e.g. `gc` expands to `git commit -m ''` with cursor inside quotes).
 
-### Fish prompt (pure)
+### Fish prompt (starship)
 
-Prompt is [pure-fish](https://github.com/pure-fish/pure) (`fish_plugins`), configured entirely through `pure_*` universal variables persisted in `dot_config/fish/fish_variables` — not in `config.fish`. When changing a `pure_*` setting, `set -U` it and then re-sync `fish_variables` into the repo (e.g. `chezmoi re-add ~/.config/fish/fish_variables`) or the change won't reach other machines.
+Prompt is [starship](https://starship.rs/), managed by mise and configured via `dot_config/starship.toml`. Initialized in `config.fish` with `starship init fish | source`.
 
 ### Fish functions
 
