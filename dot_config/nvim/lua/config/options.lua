@@ -4,3 +4,4 @@
 
 vim.g.snacks_animate = false
 vim.opt.wrap = true
+vim.opt.spelllang = { "en", "it" }

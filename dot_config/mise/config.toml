@@ -12,6 +12,7 @@ run = "sudo apt update && sudo apt upgrade -y && mise self-update -y && mise upg
 ast-grep = "latest"
 chezmoi = "latest"
 helm = "latest"
+herdr = "latest"
 jq = "latest"
 k9s = "latest"
 kubectl = "latest"

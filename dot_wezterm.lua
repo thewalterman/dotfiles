@@ -14,7 +14,7 @@ end)
 local config = wezterm.config_builder()
 
 config.front_end = "WebGpu"
-config.hide_tab_bar_if_only_one_tab = false
+config.hide_tab_bar_if_only_one_tab = true
 config.font = wezterm.font("FiraCodeNerdFont")
 config.color_scheme = "Dark Pastel (Gogh)"
 config.window_decorations = "RESIZE"
@@ -35,6 +35,36 @@ config.mouse_bindings = {
 }
 
 config.keys = {
+	{
+		key = "+",
+		mods = "CTRL",
+		action = act.DisableDefaultAssignment,
+	},
+	{
+		key = "+",
+		mods = "CTRL|SHIFT",
+		action = act.DisableDefaultAssignment,
+	},
+	{
+		key = "=",
+		mods = "CTRL",
+		action = act.DisableDefaultAssignment,
+	},
+	{
+		key = "=",
+		mods = "CTRL|SHIFT",
+		action = act.DisableDefaultAssignment,
+	},
+	{
+		key = "-",
+		mods = "CTRL",
+		action = act.DisableDefaultAssignment,
+	},
+	{
+		key = "0",
+		mods = "CTRL",
+		action = act.ResetFontSize,
+	},
 	{
 		key = "{",
 		mods = "CTRL|SHIFT",
@@ -61,7 +91,7 @@ config.keys = {
 		action = act.SplitHorizontal({}),
 	},
 	{
-		key = "?",
+		key = "_",
 		mods = "CTRL|SHIFT",
 		action = act.SplitVertical({}),
 	},
