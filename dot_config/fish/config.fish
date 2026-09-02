@@ -1,19 +1,17 @@
 fish_add_path $HOME/.local/bin
 
 alias b 'cd -'
-alias bat batcat
 alias c clear
-alias cat 'batcat -pp'
+alias cat 'bat -pp'
 alias cm chezmoi
 alias d docker
-alias fd fdfind
 alias k kubectl
 alias kk 'k9s -A'
 alias lg lazygit
 alias lc lazydocker
 alias ls 'eza --icons -1'
 alias la 'eza --icons -TL2'
-alias ll 'eza -hal --header --icons'
+alias ll 'eza -hal --icons --header'
 alias l nvim
 alias q exit
 

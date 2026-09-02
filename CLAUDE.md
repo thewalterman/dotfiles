@@ -88,7 +88,7 @@ Prompt is [starship](https://starship.rs/), managed by mise and configured via `
 Custom functions live in `dot_config/fish/functions/`:
 
 - `y` — Yazi file browser with CWD integration (changes shell directory on exit)
-- `fcd` — fzf directory picker (uses `fdfind` + `eza` preview) that `cd`s into the selection
+- `fcd` — fzf directory picker (uses `fd` + `eza` preview) that `cd`s into the selection
 - `fkube` — Kubernetes fuzzy-select utilities
 - `fssh` — SSH helper
 - `devops` — With no args, attaches to (or creates, via the `devops` layout) a zellij session named after the current directory's basename. With a session name arg, plain `zellij attach <name>` instead — tab-completed from `zellij list-sessions` via `dot_config/fish/completions/devops.fish`. Always targets a named session — `zellij attach` with no name errors out (and would kill the shell via `exec`) once 2+ sessions exist. Mirrored as a bash function in `dot_bashrc`.

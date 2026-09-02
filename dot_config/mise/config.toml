@@ -3,14 +3,19 @@ EDITOR = "nvim"
 KUBE_EDITOR = "nvim"
 K9S_FEATURE_GATE_NODE_SHELL = "true"
 
-[tasks.update]
+[tasks.full-upgrade]
 quiet = true
-description = "Update apt packages and upgrade mise itself + all mise-managed tools"
-run = "sudo apt update && sudo apt upgrade -y && mise self-update -y && mise upgrade"
+description = "Update apt packages and all mise-managed tools"
+run = "sudo apt update && sudo apt full-upgrade -y && mise self-update -y && mise upgrade"
 
 [tools]
+age = "latest"
 ast-grep = "latest"
+bat = "latest"
+btop = "latest"
 chezmoi = "latest"
+eza = "latest"
+fd = "latest"
 flux2 = "latest"
 fzf = "latest"
 helm = "latest"
@@ -20,15 +25,17 @@ k9s = "latest"
 kubectl = "latest"
 lazydocker = "latest"
 lazygit = "latest"
+mkcert = "latest"
 neovim = "latest"
 node = "24"
+ripgrep = "latest"
 starship = "latest"
-stern = "latest"
 tree-sitter = "latest"
 usage = "latest"
 yazi = "latest"
 yq = "latest"
 zellij = "latest"
+zoxide = "latest"
 
 [settings]
 experimental = true

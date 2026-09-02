@@ -1,7 +1,0 @@
-# This file contains fish universal variable definitions.
-# VERSION: 3.0
-SETUVAR Z_DATA_DIR:/home/wlomonaco/\x2elocal/share/z
-SETUVAR __fish_initialized:4300
-SETUVAR fish_greeting:\x1d
-SETUVAR fish_transient_prompt:1
-SETUVAR fish_user_paths:/home/wlomonaco/\x2elocal/bin\x1e/home/wlomonaco/\x2elocal/share/mise/installs/node/24\x2e15\x2e0/bin\x1e/home/wlomonaco/\x2eopencode/bin\x1e/home/wlomonaco/\x2ekrew/bin\x1e/home/linuxbrew/\x2elinuxbrew/bin\x1e/home/linuxbrew/\x2elinuxbrew\x1e/home/wlomonaco/\x2eistioctl/bin

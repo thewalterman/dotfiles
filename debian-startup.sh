@@ -28,74 +28,57 @@ while true; do
 done 2>/dev/null &
 
 BASE_PACKS=(
-  sudo
-  make
-  wget
-  curl
-  vim
-  nano
-  git
-  tmux
-  tar
-  zip
-  unzip
-  gnupg
   apt-transport-https
+  bash-completion
+  build-essential
   ca-certificates
-  software-properties-common
+  curl
+  debianutils
+  dnsmasq
+  file
+  findutils
+  fish
+  fontconfig
+  git
+  gnupg
+  iproute2
   libnss3-tools
   libssl-dev
-)
-
-ESSENTIAL_PACKS=(
-  gcc
-  build-essential
-  bash-completion
-  net-tools
-  debianutils
-  findutils
-  file
-  procps
-  nmap
-  ufw
-  ncdu
-  xclip
-  xsel
   mtr
-  openssl
+  nano
+  ncdu
+  nfs-common
+  nmap
   openssh-client
   openssh-server
+  openssl
   openvpn
-  dnsmasq
-  nfs-common
+  procps
+  software-properties-common
+  sudo
+  tar
+  tmux
+  ufw
+  unzip
+  vim
+  wget
+  xclip
+  zip
 )
 
 EXTRA_PACKS=(
-  zoxide
-  fontconfig
-  mkcert
-  age
-  neofetch
-  btop
-  gdu
-  duf
-  bat
-  ripgrep
-  fd-find
+  imagemagick
   luarocks
-  sshpass
+  neofetch
   pass
   pass-otp
-  eza
-  imagemagick
-  fish
+  sshpass
 )
 
 info "Updating and installing apt packages..."
 sudo apt-add-repository -y ppa:fish-shell/release-4
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y "${BASE_PACKS[@]}"
-sudo apt install -y "${ESSENTIAL_PACKS[@]}"
 sudo apt install -y "${EXTRA_PACKS[@]}"
 success "Apt packages installed"
 
