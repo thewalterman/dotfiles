@@ -11,6 +11,8 @@ run = "sudo apt update && sudo apt upgrade -y && mise self-update -y && mise upg
 [tools]
 ast-grep = "latest"
 chezmoi = "latest"
+flux2 = "latest"
+fzf = "latest"
 helm = "latest"
 herdr = "latest"
 jq = "latest"

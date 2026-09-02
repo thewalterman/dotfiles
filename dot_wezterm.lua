@@ -1,5 +1,10 @@
 local wezterm = require("wezterm")
 
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+end)
+
 wezterm.on("window-config-reloaded", function(window, pane)
 	local id = tostring(window:window_id())
 	local seen = wezterm.GLOBAL.seen_windows or {}
@@ -8,6 +13,17 @@ wezterm.on("window-config-reloaded", function(window, pane)
 	wezterm.GLOBAL.seen_windows = seen
 	if is_new_window then
 		window:maximize()
+		window:focus()
+		local last_cols = pane:get_dimensions().cols
+		for _ = 1, 20 do
+			wezterm.sleep_ms(50)
+			local cols = pane:get_dimensions().cols
+			if cols == last_cols then
+				break
+			end
+			last_cols = cols
+		end
+		pane:send_text("\x0c")
 	end
 end)
 

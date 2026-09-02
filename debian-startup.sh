@@ -87,7 +87,6 @@ EXTRA_PACKS=(
   pass
   pass-otp
   eza
-  fzf
   imagemagick
   fish
 )
