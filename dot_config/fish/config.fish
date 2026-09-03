@@ -1,4 +1,5 @@
 fish_add_path $HOME/.local/bin
+set -gx FZF_CTRL_R_OPTS '--with-nth=3..'
 
 alias b 'cd -'
 alias c clear

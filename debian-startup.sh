@@ -82,6 +82,16 @@ sudo apt install -y "${BASE_PACKS[@]}"
 sudo apt install -y "${EXTRA_PACKS[@]}"
 success "Apt packages installed"
 
+info "Adding GitHub host key to known_hosts..."
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+if ! ssh-keygen -F github.com &>/dev/null; then
+  ssh-keyscan -t rsa,ed25519 github.com >>~/.ssh/known_hosts
+  success "GitHub host key added"
+else
+  info "GitHub host key already present, skipping"
+fi
+
 info "Installing Nerd Fonts (FiraCode)..."
 fonts_zip="FiraCode.zip"
 fonts_dir="$HOME/.local/share/fonts"

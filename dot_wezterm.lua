@@ -35,6 +35,12 @@ config.font = wezterm.font("FiraCodeNerdFont")
 config.color_scheme = "Dark Pastel (Gogh)"
 config.window_decorations = "RESIZE"
 
+config.window_background_image = wezterm.home_dir .. "/.config/wezterm/wallpaper.jpg"
+
+config.window_background_image_hsb = {
+	brightness = 0.01,
+}
+
 local act = wezterm.action
 
 config.mouse_bindings = {
